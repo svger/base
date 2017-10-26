@@ -2,7 +2,7 @@
   "name": "utils",
   "version": "0.0.1",
   "description": "utils",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "build": "./node_modules/.bin/tools run build",
     "prepublish": "npm run build",
