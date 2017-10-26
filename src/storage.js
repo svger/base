@@ -1,7 +1,13 @@
+/**
+ * utils/storage
+ *
+ * 本地存储
+ */
 import {
   isEmpty,
   isEmptyStr,
-  isNullOrUndefined
+  isNullOrUndefined,
+  sizeof
 } from '../lang';
 
 let safeData = {
@@ -9,15 +15,60 @@ let safeData = {
   sessionStorage: []
 };
 
+// 宿主
+const HOST = window;
+const NULL_VAL = '';
+
+/**
+ * 本地存储类型
+ */
+export const Types = {
+  SESSION: 'sessionStorage',
+  LOCAL: 'localStorage'
+};
+
+
 let errReporter = function (err) {
   /* eslint-disable no-console */
   console.log(err);
 }
 
-// 宿主
-let HOST = window;
+/**
+ * 检测本地存储是否支持
+ *
+ * @param {Types} type 本地存储类型 Types
+ * @returns {boolean}
+ * @example
+ *
+ * if (Storage.available('sessionStorage')) {
+ *   sessionStorage.setItem('test', 'abc');
+ * }
+ */
+export function available(type) {
+  let storage = HOST[type];
 
-const NULL_VAL = '';
+  try {
+    let x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+
+    return true;
+  } catch (e) {
+    /* eslint-disable no-undef */
+    return e instanceof DOMException && (
+      // everything except Firefox
+      e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === 'QuotaExceededError' ||
+        // Firefox
+        e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage.length !== 0;
+  }
+}
 
 /**
  * 获取字段
@@ -145,4 +196,35 @@ export function setProtectedKeys(local = [], session = []) {
  */
 export function setErrReporter(reporter) {
   errReporter = reporter;
+}
+
+/**
+ * 计算本地存储数据大小
+ *
+ * @param {string} type 存储类型 sessionStorage, localStorage
+ * @returns {*}
+ */
+export function calcStorageDataSize(type) {
+  const storage = HOST[type];
+
+  if (!storage) {
+    return 0;
+  }
+
+  if (storage && storage.getItem && storage.key && storage.length) {
+    const len = storage.length;
+    let str = '';
+    let i = 0;
+    while (i < len) {
+      const key = storage.key(i);
+      const val = storage.getItem(key);
+
+      str += key + val;
+      i++;
+    }
+
+    return sizeof(str);
+  }
+
+  return 0;
 }

@@ -27,6 +27,7 @@
     "import/extensions": 0,
     "no-unused-expressions": 0,
     "import/no-unresolved": 0,
+    "import/no-named-as-default": 0,
     //The body of a for-in should be wrapped in an if statement to filter unwanted properties from the prototype
     "guard-for-in": 0,
     //Using 'ForInStatement' is not allowed

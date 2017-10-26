@@ -4,12 +4,15 @@ define(['exports', '../lang'], function (exports, _lang) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+  exports.Types = undefined;
+  exports.available = available;
   exports.getItem = getItem;
   exports.setItem = setItem;
   exports.removeItem = removeItem;
   exports.safeClearStorage = safeClearStorage;
   exports.setProtectedKeys = setProtectedKeys;
   exports.setErrReporter = setErrReporter;
+  exports.calcStorageDataSize = calcStorageDataSize;
 
 
   var safeData = {
@@ -17,15 +20,64 @@ define(['exports', '../lang'], function (exports, _lang) {
     sessionStorage: []
   };
 
+  // 宿主
+  /**
+   * utils/storage
+   *
+   * 本地存储
+   */
+  var HOST = window;
+  var NULL_VAL = '';
+
+  /**
+   * 本地存储类型
+   */
+  var Types = exports.Types = {
+    SESSION: 'sessionStorage',
+    LOCAL: 'localStorage'
+  };
+
   var errReporter = function errReporter(err) {
     /* eslint-disable no-console */
     console.log(err);
   };
 
-  // 宿主
-  var HOST = window;
+  /**
+   * 检测本地存储是否支持
+   *
+   * @param {Types} type 本地存储类型 Types
+   * @returns {boolean}
+   * @example
+   *
+   * if (Storage.available('sessionStorage')) {
+   *   sessionStorage.setItem('test', 'abc');
+   * }
+   */
+  function available(type) {
+    var storage = HOST[type];
 
-  var NULL_VAL = '';
+    try {
+      var x = '__storage_test__';
+      storage.setItem(x, x);
+      storage.removeItem(x);
+
+      return true;
+    } catch (e) {
+      /* eslint-disable no-undef */
+      return e instanceof DOMException && (
+      // everything except Firefox
+      e.code === 22 ||
+      // Firefox
+      e.code === 1014 ||
+      // test name field too, because code might not be present
+      // everything except Firefox
+      e.name === 'QuotaExceededError' ||
+      // Firefox
+      e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage.length !== 0;
+    }
+  }
 
   /**
    * 获取字段
@@ -156,5 +208,36 @@ define(['exports', '../lang'], function (exports, _lang) {
    */
   function setErrReporter(reporter) {
     errReporter = reporter;
+  }
+
+  /**
+   * 计算本地存储数据大小
+   *
+   * @param {string} type 存储类型 sessionStorage, localStorage
+   * @returns {*}
+   */
+  function calcStorageDataSize(type) {
+    var storage = HOST[type];
+
+    if (!storage) {
+      return 0;
+    }
+
+    if (storage && storage.getItem && storage.key && storage.length) {
+      var len = storage.length;
+      var str = '';
+      var i = 0;
+      while (i < len) {
+        var key = storage.key(i);
+        var val = storage.getItem(key);
+
+        str += key + val;
+        i++;
+      }
+
+      return (0, _lang.sizeof)(str);
+    }
+
+    return 0;
   }
 });

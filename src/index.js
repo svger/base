@@ -1,4 +1,6 @@
-import Lang from './lang';
-import Storage from './storage';
+export * as Lang from './lang';
+export * as Storage from './storage';
+export * as Log from './log';
+export * as cookies from './cookies';
 
-export { Lang, Storage }
+// qs、ua-parser-js

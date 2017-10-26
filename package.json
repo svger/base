@@ -17,9 +17,12 @@
   ],
   "author": "Kane",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "md5": "~2.2.1"
+  },
   "devDependencies": {
     "@cefc-utils/tools": "^1.0.11",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.9.0",
@@ -32,14 +35,16 @@
         "env",
         {
           "targets": {
-            "chrome": 52,
             "browsers": [
-              "last 2 versions",
-              "safari 7"
+              "Android >= 4",
+              "iOS >= 7",
+              "Safari >= 7",
+              "not ie <= 8"
             ]
           }
         }
-      ]
+      ],
+      "stage-1"
     ]
   }
 }

@@ -224,7 +224,7 @@ aws4@^1.2.1:
   version "1.6.0"
   resolved "http://10.199.107.120:8888/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
-babel-cli@^6.6.0:
+babel-cli@^6.26.0, babel-cli@^6.6.0:
   version "6.26.0"
   resolved "http://10.199.107.120:8888/babel-cli/-/babel-cli-6.26.0.tgz#502ab54874d7db88ad00b887a06383ce03d002f1"
   dependencies:
@@ -1143,6 +1143,10 @@ chalk@^2.0.0, chalk@^2.1.0:
     escape-string-regexp "^1.0.5"
     supports-color "^4.0.0"
 
+charenc@~0.0.1:
+  version "0.0.2"
+  resolved "http://10.199.107.120:8888/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
+
 child_process@^1.0.2:
   version "1.0.2"
   resolved "http://10.199.107.120:8888/child_process/-/child_process-1.0.2.tgz#b1f7e7fc73d25e7fd1d455adc94e143830182b5a"
@@ -1269,6 +1273,10 @@ cross-spawn@^5.1.0:
     lru-cache "^4.0.1"
     shebang-command "^1.2.0"
     which "^1.2.9"
+
+crypt@~0.0.1:
+  version "0.0.2"
+  resolved "http://10.199.107.120:8888/crypt/-/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
 
 cryptiles@2.x.x:
   version "2.0.5"
@@ -2132,6 +2140,10 @@ is-buffer@^1.1.5:
   version "1.1.5"
   resolved "http://10.199.107.120:8888/is-buffer/-/is-buffer-1.1.5.tgz#1f3b26ef613b214b88cbca23cc6c01d87961eecc"
 
+is-buffer@~1.1.1:
+  version "1.1.6"
+  resolved "http://10.199.107.120:8888/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
+
 is-builtin-module@^1.0.0:
   version "1.0.0"
   resolved "http://10.199.107.120:8888/is-builtin-module/-/is-builtin-module-1.0.0.tgz#540572d34f7ac3119f8f76c30cbc1b1e037affbe"
@@ -2578,6 +2590,14 @@ lru-cache@^4.0.1:
 map-cache@^0.2.0:
   version "0.2.2"
   resolved "http://10.199.107.120:8888/map-cache/-/map-cache-0.2.2.tgz#c32abd0bd6525d9b051645bb4f26ac5dc98a0dbf"
+
+md5@~2.2.1:
+  version "2.2.1"
+  resolved "http://10.199.107.120:8888/md5/-/md5-2.2.1.tgz#53ab38d5fe3c8891ba465329ea23fac0540126f9"
+  dependencies:
+    charenc "~0.0.1"
+    crypt "~0.0.1"
+    is-buffer "~1.1.1"
 
 micromatch@^2.1.5, micromatch@^2.3.7:
   version "2.3.11"
