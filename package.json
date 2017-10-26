@@ -1,0 +1,45 @@
+{
+  "name": "utils",
+  "version": "0.0.1",
+  "description": "utils",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/tools run build",
+    "prepublish": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@10.199.101.162:CEFC-UTILS/utils.git"
+  },
+  "keywords": [
+    "utils"
+  ],
+  "author": "Kane",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@cefc-utils/tools": "^1.0.11",
+    "babel-eslint": "^8.0.1",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "chrome": 52,
+            "browsers": [
+              "last 2 versions",
+              "safari 7"
+            ]
+          }
+        }
+      ]
+    ]
+  }
+}
