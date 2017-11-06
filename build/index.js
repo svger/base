@@ -1,38 +1,88 @@
-define(['exports', './lang', './storage', './log', './cookies'], function (exports, _lang, _storage, _log, _cookies2) {
-  'use strict';
+'use strict';
 
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.cookies = exports.Log = exports.Storage = exports.Lang = undefined;
-
-  var _Lang = _interopRequireWildcard(_lang);
-
-  var _Storage = _interopRequireWildcard(_storage);
-
-  var _Log = _interopRequireWildcard(_log);
-
-  var _cookies = _interopRequireWildcard(_cookies2);
-
-  function _interopRequireWildcard(obj) {
-    if (obj && obj.__esModule) {
-      return obj;
-    } else {
-      var newObj = {};
-
-      if (obj != null) {
-        for (var key in obj) {
-          if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
-        }
-      }
-
-      newObj.default = obj;
-      return newObj;
-    }
-  }
-
-  exports.Lang = _Lang;
-  exports.Storage = _Storage;
-  exports.Log = _Log;
-  exports.cookies = _cookies;
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
+
+var _lang = require('./lang');
+
+Object.defineProperty(exports, 'Lang', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_lang).default;
+  }
+});
+
+var _storage = require('./storage');
+
+Object.defineProperty(exports, 'Storage', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_storage).default;
+  }
+});
+
+var _log = require('./log');
+
+Object.defineProperty(exports, 'Log', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_log).default;
+  }
+});
+
+var _cookies = require('./cookies');
+
+Object.defineProperty(exports, 'Cookies', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_cookies).default;
+  }
+});
+
+var _format = require('./format');
+
+Object.defineProperty(exports, 'Format', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_format).default;
+  }
+});
+
+var _dom = require('./dom');
+
+Object.defineProperty(exports, 'Dom', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_dom).default;
+  }
+});
+
+var _sign = require('./sign');
+
+Object.defineProperty(exports, 'Sign', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_sign).default;
+  }
+});
+
+var _responsive = require('./responsive');
+
+Object.defineProperty(exports, 'Responsive', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_responsive).default;
+  }
+});
+
+var _reduxStore = require('./redux-store');
+
+Object.defineProperty(exports, 'ReduxStore', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_reduxStore).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

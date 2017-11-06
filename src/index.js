@@ -1,11 +1,12 @@
-export * as Lang from './lang';
-export * as Storage from './storage';
-export * as Log from './log';
-export * as Cookies from './cookies';
-export * as Format from './format';
-export * as Dom from './dom';
-export * as Sign from './sign';
-export * as Responsive from './responsive';
+export { default as Lang } from './lang';
+export { default as Storage } from './storage';
+export { default as Log } from './log';
+export { default as Cookies } from './cookies';
+export { default as Format } from './format';
+export { default as Dom } from './dom';
+export { default as Sign } from './sign';
+export { default as Responsive } from './responsive';
+export { default as ReduxStore } from './redux-store';
 
 /**
  * 其他第三方工具库

@@ -18,10 +18,12 @@
   "author": "Kane",
   "license": "ISC",
   "dependencies": {
-    "md5": "~2.2.1"
+    "md5": "~2.2.1",
+    "redux": "~3.7.2",
+    "redux-thunk": "~2.2.0"
   },
   "devDependencies": {
-    "@cefc-utils/tools": "^1.0.11",
+    "@cefc-utils/tools": "~1.0.14",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-preset-env": "^1.6.1",
