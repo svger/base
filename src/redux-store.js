@@ -46,3 +46,6 @@ export const addReducer = (reducers) => {
   storeCache.replaceReducer(rootReducer);
 }
 
+// 单例
+export const store = configureStore();
+
