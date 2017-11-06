@@ -13,7 +13,7 @@ exports.setProtectedKeys = setProtectedKeys;
 exports.setErrReporter = setErrReporter;
 exports.calcStorageDataSize = calcStorageDataSize;
 
-var _lang = require('../lang');
+var _lang = require('./lang');
 
 var safeData = {
   localStorage: [],
