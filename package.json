@@ -1,5 +1,5 @@
 {
-  "name": "utils",
+  "name": "@cefc-utils/utils",
   "version": "0.0.1",
   "description": "utils",
   "main": "build/index.js",
