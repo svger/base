@@ -34,7 +34,7 @@ var configureStore = exports.configureStore = function configureStore(preloadedS
   var middlewares = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [_reduxThunk2.default];
 
   var createStoreWithMiddleware = _redux.applyMiddleware.apply(undefined, _toConsumableArray(middlewares))(_redux.createStore);
-  var store = createStoreWithMiddleware(!reducerCache ? rootReducer : (0, _redux.combineReducers)(reducerCache), preloadedState);
+  var store = createStoreWithMiddleware(rootReducer, preloadedState);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

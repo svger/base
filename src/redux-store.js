@@ -7,7 +7,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
 let rootReducer = () => {};
-let reducerCache = null;
+let reducerCache = {};
 let storeCache = {};
 
 /**
@@ -18,7 +18,7 @@ let storeCache = {};
  */
 export const configureStore = (preloadedState, middlewares = [thunk]) => {
   const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
-  const store = createStoreWithMiddleware(!reducerCache ? rootReducer : combineReducers(reducerCache), preloadedState);
+  const store = createStoreWithMiddleware(rootReducer, preloadedState);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
