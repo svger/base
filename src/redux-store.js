@@ -7,7 +7,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
 let rootReducer = () => {};
-let reducerCache = {};
+let reducerCache = null;
 let storeCache = {};
 
 /**
