@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addReducer = exports.configureStore = undefined;
+exports.store = exports.addReducer = exports.configureStore = undefined;
 
 var _redux = require('redux');
 
@@ -61,3 +61,6 @@ var addReducer = exports.addReducer = function addReducer(reducers) {
   rootReducer = (0, _redux.combineReducers)(reducerCache);
   storeCache.replaceReducer(rootReducer);
 };
+
+// 单例
+var store = exports.store = configureStore();
