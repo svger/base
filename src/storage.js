@@ -8,7 +8,7 @@ import {
   isEmptyStr,
   isNullOrUndefined,
   sizeof
-} from '../lang';
+} from './lang';
 
 let safeData = {
   localStorage: [],
