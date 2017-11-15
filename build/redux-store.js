@@ -3,7 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.store = exports.addReducer = exports.configureStore = undefined;
+exports.default = configureStore;
+exports.addReducer = addReducer;
 
 var _redux = require('redux');
 
@@ -13,54 +14,71 @@ var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } } /**
-                                                                                                                                                                                                     * utils/redux-store
-                                                                                                                                                                                                     *
-                                                                                                                                                                                                     * actions、reducers 可以按业务模块写在一个文件中，并通过 addReducer 动态添加到 store
-                                                                                                                                                                                                     */
-
-
-var rootReducer = function rootReducer() {};
-var reducerCache = {};
-var storeCache = {};
+/**
+ * 给 thunk action 注入参数 fetch、history
+ *
+ * @example
+ *
+ * function aActionCreator() {
+ *   return (dispatch, fetch, history) {
+ *     fetch('https://xxx.com/a/b')
+ *       .then(res => {
+ *         history.push({ pathname: '/home', search: '?the=query', state: { some: 'state' } });
+ *       });
+ *   }
+ * }
+ */
 
 /**
- * 首次配置 Store, 设置初始 state 及中间件
+ * utils/redux-store
  *
- * @param {Object} preloadedState 初始 state
- * @param {Array} middlewares 中间件列表
+ * actions、reducers 可以按业务模块写在一个文件中，并通过 addReducer 动态添加到 store
  */
-var configureStore = exports.configureStore = function configureStore(preloadedState) {
-  var middlewares = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [_reduxThunk2.default];
+function configureStore(initialState, helpers) {
+  var middleware = [_reduxThunk2.default.withExtraArgument(helpers)];
 
-  var createStoreWithMiddleware = _redux.applyMiddleware.apply(undefined, _toConsumableArray(middlewares))(_redux.createStore);
-  var store = createStoreWithMiddleware(rootReducer, preloadedState);
+  var enhancer = null;
 
-  if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept(function () {
-      store.replaceReducer(storeCache);
-    });
+  // eslint-disable-next-line no-underscore-dangle
+  if (process.env.__DEV__) {
+    // https://github.com/zalmoxisus/redux-devtools-extension#redux-devtools-extension
+    var devToolsExtension = function devToolsExtension(f) {
+      return f;
+    };
+    if (process.env.BROWSER && window.devToolsExtension) {
+      devToolsExtension = window.devToolsExtension();
+    }
+
+    enhancer = (0, _redux.compose)(_redux.applyMiddleware.apply(undefined, middleware), devToolsExtension);
+  } else {
+    enhancer = _redux.applyMiddleware.apply(undefined, middleware);
   }
 
-  storeCache = store;
+  // client 使用 global store
+  return (0, _redux.createStore)(function (state) {
+    return state;
+  }, initialState, enhancer);
+}
 
-  return storeCache;
-};
+// eslint-disable-next-line prefer-const
+var reducerCache = {};
 
 /**
- * 动态添加 reducer
- * @param {Object} reducers redux reducers
+ * client 使用，动态增加 reducers
+ * @param {*} reducers
  */
-var addReducer = exports.addReducer = function addReducer(reducers) {
-  var reducerKeys = Object.keys(reducers);
-  reducerKeys.forEach(function (key) {
-    reducerCache[key] = reducers[key];
-  });
+function addReducer(store, reducers) {
+  if (process.env.BROWSER) {
+    var reducerKeys = Object.keys(reducers);
+    reducerKeys.forEach(function (key) {
+      reducerCache[key] = reducers[key];
+    });
 
-  rootReducer = (0, _redux.combineReducers)(reducerCache);
-  storeCache.replaceReducer(rootReducer);
-};
+    store.replaceReducer((0, _redux.combineReducers)(reducerCache));
 
-// 单例
-var store = exports.store = configureStore();
+    return;
+  }
+
+  // server 端
+  store.replaceReducer((0, _redux.combineReducers)(reducers));
+}

@@ -3,49 +3,67 @@
  *
  * actions、reducers 可以按业务模块写在一个文件中，并通过 addReducer 动态添加到 store
  */
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
-let rootReducer = () => {};
-let reducerCache = {};
-let storeCache = {};
-
 /**
- * 首次配置 Store, 设置初始 state 及中间件
+ * 给 thunk action 注入参数 fetch、history
  *
- * @param {Object} preloadedState 初始 state
- * @param {Array} middlewares 中间件列表
+ * @example
+ *
+ * function aActionCreator() {
+ *   return (dispatch, fetch, history) {
+ *     fetch('https://xxx.com/a/b')
+ *       .then(res => {
+ *         history.push({ pathname: '/home', search: '?the=query', state: { some: 'state' } });
+ *       });
+ *   }
+ * }
  */
-export const configureStore = (preloadedState, middlewares = [thunk]) => {
-  const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
-  const store = createStoreWithMiddleware(rootReducer, preloadedState);
 
-  if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept(() => {
-      store.replaceReducer(storeCache);
-    });
+export default function configureStore(initialState, helpers) {
+  const middleware = [thunk.withExtraArgument(helpers)];
+
+  let enhancer = null;
+
+  // eslint-disable-next-line no-underscore-dangle
+  if (process.env.__DEV__) {
+    // https://github.com/zalmoxisus/redux-devtools-extension#redux-devtools-extension
+    let devToolsExtension = f => f;
+    if (process.env.BROWSER && window.devToolsExtension) {
+      devToolsExtension = window.devToolsExtension();
+    }
+
+    enhancer = compose(applyMiddleware(...middleware), devToolsExtension);
+  } else {
+    enhancer = applyMiddleware(...middleware);
   }
 
-  storeCache = store;
-
-  return storeCache;
+  // client 使用 global store
+  return createStore(state => state, initialState, enhancer);
 }
+
+// eslint-disable-next-line prefer-const
+let reducerCache = {};
 
 /**
- * 动态添加 reducer
- * @param {Object} reducers redux reducers
+ * client 使用，动态增加 reducers
+ * @param {*} reducers
  */
-export const addReducer = (reducers) => {
-  const reducerKeys = Object.keys(reducers);
-  reducerKeys.forEach((key) => {
-    reducerCache[key] = reducers[key];
-  });
+export function addReducer(store, reducers) {
+  if (process.env.BROWSER) {
+    const reducerKeys = Object.keys(reducers);
+    reducerKeys.forEach(key => {
+      reducerCache[key] = reducers[key];
+    });
 
-  rootReducer = combineReducers(reducerCache);
-  storeCache.replaceReducer(rootReducer);
+    store.replaceReducer(combineReducers(reducerCache));
+
+    return;
+  }
+
+  // server 端
+  store.replaceReducer(combineReducers(reducers));
 }
 
-// 单例
-export const store = configureStore();
 
