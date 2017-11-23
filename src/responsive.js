@@ -7,7 +7,7 @@
  *
  * @param {number} 视觉稿宽度 / 2
  */
-export const adaptPage = (uiWidth = 375, maxWidth = 414) => {
+export const adaptPage = (uiWidth = 375, maxWidth = 420) => {
   const docEl = document.documentElement;
   let deviceWidth = docEl.clientWidth;
 

@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", {
  */
 var adaptPage = exports.adaptPage = function adaptPage() {
   var uiWidth = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 375;
-  var maxWidth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 414;
+  var maxWidth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 420;
 
   var docEl = document.documentElement;
   var deviceWidth = docEl.clientWidth;

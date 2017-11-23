@@ -1,6 +1,6 @@
 {
-  "name": "@cefc-utils/utils",
-  "version": "0.0.7",
+  "name": "cefc-utils",
+  "version": "0.0.1",
   "description": "utils",
   "main": "build/index.js",
   "scripts": {
@@ -23,10 +23,10 @@
     "redux-thunk": "~2.2.0"
   },
   "devDependencies": {
-    "@cefc-utils/tools": "~1.0.14",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-preset-env": "^1.6.1",
+    "cefc-tools": "~0.0.4",
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0"
