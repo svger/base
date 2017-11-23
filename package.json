@@ -18,9 +18,7 @@
   "author": "Kane",
   "license": "ISC",
   "dependencies": {
-    "md5": "~2.2.1",
-    "redux": "~3.7.2",
-    "redux-thunk": "~2.2.0"
+    "md5": "~2.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
