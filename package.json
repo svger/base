@@ -1,6 +1,6 @@
 {
   "name": "cefc-utils",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "utils",
   "main": "build/index.js",
   "scripts": {
