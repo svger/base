@@ -26,7 +26,7 @@ var safeData = {
  *
  * 本地存储
  */
-var HOST = window;
+var HOST = process.env.BROWSER ? window : global;
 var NULL_VAL = '';
 
 /**
