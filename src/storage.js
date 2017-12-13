@@ -16,7 +16,7 @@ let safeData = {
 };
 
 // 宿主
-const HOST = window;
+const HOST = process.env.BROWSER ? window : global;
 const NULL_VAL = '';
 
 /**
