@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ReduxStore = exports.Responsive = exports.Sign = exports.Dom = exports.Format = exports.Cookies = exports.Log = exports.Storage = exports.Lang = undefined;
+exports.Responsive = exports.Sign = exports.Dom = exports.Format = exports.Cookies = exports.Log = exports.Storage = exports.Lang = undefined;
 
 var _lang = require('./lang');
 
@@ -37,10 +37,6 @@ var _responsive = require('./responsive');
 
 var _Responsive = _interopRequireWildcard(_responsive);
 
-var _reduxStore = require('./redux-store');
-
-var _ReduxStore = _interopRequireWildcard(_reduxStore);
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 exports.Lang = _Lang;
@@ -51,7 +47,6 @@ exports.Format = _Format;
 exports.Dom = _Dom;
 exports.Sign = _Sign;
 exports.Responsive = _Responsive;
-exports.ReduxStore = _ReduxStore;
 
 /**
  * 其他第三方工具库
