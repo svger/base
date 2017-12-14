@@ -6,7 +6,6 @@ export * as Format from './format';
 export * as Dom from './dom';
 export * as Sign from './sign';
 export * as Responsive from './responsive';
-export * as ReduxStore from './redux-store';
 
 /**
  * 其他第三方工具库
