@@ -1,6 +1,6 @@
 {
   "name": "cefc-utils",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "utils",
   "main": "lib/cefc-utils.js",
   "module": "es/cefc-utils.js",
@@ -79,5 +79,14 @@
         ]
       }
     }
-  }
+  },
+  "npmName": "cefc-utils",
+  "npmFileMap": [
+    {
+      "basePath": "/dist/",
+      "files": [
+        "*.js"
+      ]
+    }
+  ]
 }
