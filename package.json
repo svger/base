@@ -1,6 +1,6 @@
 {
   "name": "cefc-utils",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "utils",
   "main": "lib/cefc-utils.js",
   "module": "es/cefc-utils.js",
@@ -17,7 +17,7 @@
     "build:umd:min": "cross-env BABEL_ENV=es NODE_ENV=production rollup -c -o dist/cefc-utils.min.js",
     "build": "npm run clean && npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
     "prepare": "npm run clean && npm run build",
-    "clean": "rm -rf ./dist ./es ./lib",
+    "clean": "rimraf dist es lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -42,6 +42,7 @@
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
+    "rimraf": "^2.6.2",
     "rollup": "^0.54.0",
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-node-resolve": "^3.0.2",
