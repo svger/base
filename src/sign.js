@@ -3,7 +3,8 @@
  *
  * 接口签名
  */
-import md5 from 'md5';
+// import md5 from 'md5.js';
+const md5 = require('md5');
 
 let __signSep = '<=>';
 

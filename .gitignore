@@ -5,3 +5,7 @@ node_modules
 ncp-debug.log
 npm-debug.log
 logs/
+build
+dist
+lib
+es
