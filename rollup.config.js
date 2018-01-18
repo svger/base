@@ -21,7 +21,7 @@ if (env === 'es' || env === 'cjs') {
 
 if (env === 'development' || env === 'production') {
   config.output = { format: 'umd' }
-  config.name = 'CefcUtils'
+  config.name = 'SvgerUtils'
   config.plugins.push(
     nodeResolve({
       jsnext: true
